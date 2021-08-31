@@ -6,41 +6,64 @@ public class CDT {
 
     private String numCDT;
     private String fechCDT;
-    private double intCDT;
-    private double montoCDT;
+    private double intCDT, montoCDT, intMensualCDT, valRetorno;
     private int plazoCDT;
     
-    public void setNumCuenta(String numeroCta) {
-        this.numCuenta = numeroCta;
+    public void setNumCDT(String numeroCDT) {
+        this.numCDT = numeroCDT;
     }
     
-    public String getNumCuenta() {
-        return this.numCuenta;
+    public String getNumCDT() {
+        return this.numCDT;
     }
     
-    public void setFechCuenta(String fechaCta) {
-        this.fechCuenta = fechaCta;
+    public void setFechCDT(String fechaCDT) {
+        this.fechCDT = fechaCDT;
     }
     
-    public String getFechCuenta() {
-        return this.fechCuenta;
+    public String getFechCDT() {
+        return this.fechCDT;
     }
     
-    public void setIntCuenta(double interesCta) {
-        this.intCuenta = interesCta;
+    public void setIntCDT(double interesCDT) {
+        this.intCDT = interesCDT;
     }
     
-    public double getIntCuenta() {
-        return this.intCuenta;
+    public double getIntCDT() {
+        return this.intCDT;
     }
     
-    public void setSalCuenta(double saldoCta) {
-        this.salCuenta = saldoCta;
+    public void setMontoCDT(double monCDT) {
+        this.montoCDT = monCDT;
     }
     
-    public double getSalCuenta() {
-        return this.salCuenta;
+    public double getMontoCDT() {
+        return this.montoCDT;
     }
 
+    public void setPlazoCDT(int plaCDT) {
+        this.plazoCDT = plaCDT;
+    }
+    
+    public double getPlazoCDT() {
+        return this.plazoCDT;
+    }
+    
+    public double calc_int_mensual() {
+        intMensualCDT = 0;
+        
+        intMensualCDT = this.montoCDT * this.plazoCDT / 100;
+        
+        return intMensualCDT;
+    }
+    
+    public double calc_val_retorno() {
+        valRetorno = 0;
+        
+        valRetorno = this.intMensualCDT * this.plazoCDT;
+        
+        return valRetorno;
+    }
+    
     
 }

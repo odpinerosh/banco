@@ -10,11 +10,13 @@ public class Banco {
         Scanner consola=new Scanner(System.in);
         consola.useDelimiter("\n");
         int opcion, plazo_cdt;
-        Double interes_ahorro, val_interes_ahorro, interes_corriente, val_interes_corriente, interes_tarjeta, interes_cdt, saldo_ahorro, saldo_corriente, sobre_corriente, cupo_tarjeta, usado_tarjeta, monto_cdt;
+        Double interes_ahorro, val_interes_ahorro, interes_corriente, val_interes_corriente, interes_tarjeta, interes_cdt, intmensual_cdt, retorno_cdt, saldo_ahorro, saldo_corriente, sobre_corriente, val_interes_tarjeta, cupo_tarjeta, usado_tarjeta, monto_cdt;
         String documento, nombre, email, celular, direccion, fecha_ahorros, num_ahorros, fecha_corriente, num_corriente, fecha_apertura, fecha_vence, num_tarjeta, fecha_cdt, num_cdt;
         Cliente obj_cliente;
         CtaAhorros obj_ahorros;
         CtaCorriente obj_corriente;
+        CDT obj_cdt;
+        Tarjeta obj_tarjeta;
         
         
         do{
@@ -138,16 +140,60 @@ public class Banco {
                     System.out.println("Monto del CDT: ");
                     monto_cdt=consola.nextDouble();
                     
-                    System.out.println("Plazo del CDTo: ");
+                    System.out.println("Plazo del CDT: ");
                     plazo_cdt=consola.nextInt();
 
                     System.out.println("Interés pactado: ");
-                    interes_cdt=consola.nextDouble();                    
+                    interes_cdt=consola.nextDouble();
                     
+                    //Creación del objeto
+                    obj_cdt = new CDT();
+                    obj_cdt.setNumCDT(num_cdt);
+                    obj_cdt.setFechCDT(fecha_cdt);
+                    obj_cdt.setMontoCDT(monto_cdt);
+                    obj_cdt.setPlazoCDT(plazo_cdt);
+                    obj_cdt.setIntCDT(interes_cdt);
                     
+                    intmensual_cdt = obj_cdt.calc_int_mensual();
+                    retorno_cdt = obj_cdt.calc_val_retorno();
                     
+                    System.out.println("Valor intereses mensual: " + intmensual_cdt);
+                    System.out.println("Valor de retorno por " + obj_cdt.getPlazoCDT() + " meses: " + retorno_cdt);
+                    break;
+                }
+                case 5: { 
+                    System.out.println("    Tarjeta de Crédito");
+                    System.out.println("Tarjeta número: ");
+                    num_tarjeta=consola.next();
+                    consola.nextLine();
                     
+                    System.out.println("Fecha Apertura --mm/dd/aaaa--: ");
+                    fecha_apertura=consola.next();
+                    consola.nextLine();
                     
+                    System.out.println("Fecha Vencimiento --mm/dd/aaaa--: ");
+                    fecha_vence=consola.next();
+                    consola.nextLine();
+                    
+                    System.out.println("Interés: ");
+                    interes_tarjeta = consola.nextDouble();
+                    
+                    System.out.println("Cupo asignado: ");
+                    cupo_tarjeta = consola.nextDouble();
+                    
+                    System.out.println("Cupo utilizado: ");
+                    usado_tarjeta = consola.nextDouble();
+                    
+                    obj_tarjeta = new Tarjeta();
+                    obj_tarjeta.setNumCuenta(num_tarjeta);
+                    obj_tarjeta.setFechCuenta(fecha_apertura);
+                    obj_tarjeta.setFechaVence(fecha_vence);
+                    obj_tarjeta.setSalCuenta(cupo_tarjeta);
+                    obj_tarjeta.setCupoUsado(usado_tarjeta);
+                    obj_tarjeta.setIntCuenta(interes_tarjeta);
+                    
+                    val_interes_tarjeta = obj_tarjeta.calcInteres();
+                    System.out.println("Valor intereses a pagar: " + val_interes_tarjeta);
                     
                 }
             }
